@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Multiplicative Persistence</title>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+        body {
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+    </style>    
+
+    </head>
+
+    <body>
+        <h1>Multiplication Persistence</h1>
+        <p>Do stuff, get results</p>
+
+        <div class="form">
+            <label for="numberField">Enter number: </label><input type="text" id="numberField" class="numberField">
+            <input type="submit" value="Submit number" class="numberSubmit">
+        </div>
+
+        <div class="results">
+            <p class ="show"></p>
+            <p class ="multiply"></p>
+        </div>
+
+        <script>
+            const show = document.querySelector('.show');
+            const multiply = document.querySelector('.multiply');
+
+            const numberSubmit = document.querySelector('.numberSubmit');
+            const numberField = document.querySelector('.numberField');
+
+            numberField.focus();
+            let step = 0;
+            function runProg() {
+                show.style.backgroundColor = 'white';
+                if (step == 0) {
+                    prog();
+                } else {
+                    reset();
+                    prog();
+                }
+            }
+
+            function prog() {
+                let input = Number(numberField.value);
+                mulPer(input);
+                numberField.focus();
+            }
+
+            function mulPer(n) {
+                if (isNaN(n) == true) {
+                    show.textContent = 'ERROR NOT A NUMBER';
+                    show.style.backgroundColor = 'red';
+                } else if (String(n).length == 1) {
+                    console.log('Done in ' + step + ' steps.'); 
+                    show.textContent = ('Done in ' + step + ' steps.'); 
+                } else {
+                    step ++;
+                    let sum = 1;
+                    for (let i = 0; i < String(n).length; i++) {
+                        sum *= String(n)[i];
+                    }
+                    console.log(step, sum);
+                    para = document.createElement('p');
+                    node = document.createTextNode(sum);
+                    para.appendChild(node);
+                    multiply.appendChild(para);
+                    return mulPer(sum);
+                }
+            }
+
+            function reset() {
+                step = 0;
+                const resetResults = document.querySelectorAll('.results p');
+                for (let i = 0; i < resetResults.length; i++) {
+                    resetResults[i].textContent = '';
+                }
+            }
+
+
+            numberSubmit.addEventListener('click', runProg);
+
+        </script>
+    </body>
+</html>
