@@ -41,18 +41,13 @@
             let step = 0;
             function runProg() {
                 show.style.backgroundColor = 'white';
+                let input = Number(numberField.value);
                 if (step == 0) {
-                    prog();
+                    mulPer(input);
                 } else {
                     reset();
-                    prog();
+                    mulPer(input);
                 }
-            }
-
-            function prog() {
-                let input = Number(numberField.value);
-                mulPer(input);
-                numberField.focus();
             }
 
             function mulPer(n) {
